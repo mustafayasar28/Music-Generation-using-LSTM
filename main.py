@@ -7,8 +7,8 @@ Python code to generate music
 Mustafa Yaşar 21702808
 Ata Korkusuz
 Cemre Biltekin
-Muhittin
-Alp
+Muhittin Can Korkut
+Kemal Alp Sezer
 
 """
 import json
