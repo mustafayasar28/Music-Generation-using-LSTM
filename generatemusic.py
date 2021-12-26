@@ -5,7 +5,7 @@ import music21 as m21
 
 
 class MusicGenerator:
-    def __init__(self, path_of_model="save_model.h5"):
+    def __init__(self, path_of_model="save_gru_model.h5"):
         self.path_of_model = path_of_model
         self.lstm_model = keras.models.load_model(path_of_model)
 
