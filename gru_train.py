@@ -43,7 +43,7 @@ def generate_sequence():
     """
         At every step of GRU network, there will be an input, and there will be a target.
         For instance, while guessing the 11 th element, the first 10 elements are the inputs,
-        and the real 11th element is the target. The output of the LSTM at that step is recorded.
+        and the real 11th element is the target. The output of the GRU at that step is recorded.
     """
     for i in range(total_num_sequences):
         model_inputs.append(int_repr_songs[i: i + len_sequence])
