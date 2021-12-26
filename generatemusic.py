@@ -121,7 +121,8 @@ class MusicGenerator:
 
 
 if __name__ == "__main__":
-    mg = MusicGenerator()
-    seed = "67 _ 67 _ 67 _ _ 65 64 _ 64 _ 64 _ _"
-    music = mg.generate_music(seed, 500, 64, 0.4)
-    mg.convert_music(music)
+    gru_mg = MusicGenerator()
+    seed = "60 62 64 _ 67 65 64 _ _ _"
+    music = gru_mg.generate_music(seed, 500, 128, 0.3)
+    gru_mg.convert_music(music)
+

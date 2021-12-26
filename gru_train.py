@@ -4,10 +4,10 @@ import numpy as np
 import tensorflow.keras as keras
 
 FINAL_DIRECTORY = 'final_dir'
-MODEL_PATH = "save_model_lr_01.h5"
+MODEL_PATH = "save_gru_model.h5"
 NUMBER_OF_OUTPUT_UNITS = 38
 LOSS = "sparse_categorical_crossentropy"
-LEARNING_RATE = 0.0001
+LEARNING_RATE = 0.001
 NUMBER_OF_NEURAL_UNITS = [256]
 EPOCHS = 50
 BATCH_SIZE = 64  # Amount of sample that the networks will see before running back propagation
@@ -41,7 +41,7 @@ def generate_sequence():
     total_num_sequences = len(int_repr_songs) - len_sequence
 
     """
-        At every step of LSTM network, there will be an input, and there will be a target.
+        At every step of GRU network, there will be an input, and there will be a target.
         For instance, while guessing the 11 th element, the first 10 elements are the inputs,
         and the real 11th element is the target. The output of the LSTM at that step is recorded.
     """
@@ -71,21 +71,18 @@ def build_model(output_units, num_units, loss, learning_rate):
     """
         First, create a windows whose length is 38 and slide it onto the songs array
     """
-    lstm_input = keras.layers.Input(shape=(None, output_units))
+    gru_input = keras.layers.Input(shape=(None, output_units))
 
-    """
-        Add nodes to the LSTM model in the functional API with keras
-    """
-    lstm_model = keras.layers.LSTM(num_units[0])(lstm_input)
+    gru_model = keras.layers.GRU(num_units[0])(gru_input)
 
     """
         To avoid overfitting problems, use dropout technique
     """
-    lstm_model = keras.layers.Dropout(0.2)(lstm_model)
+    gru_model = keras.layers.Dropout(0.2)(gru_model)
 
-    output_layer = keras.layers.Dense(output_units, activation="softmax")(lstm_model)
+    output_layer = keras.layers.Dense(output_units, activation="softmax")(gru_model)
 
-    final_model = keras.Model(lstm_input, output_layer)
+    final_model = keras.Model(gru_input, output_layer)
     final_model.compile(loss=loss, optimizer=keras.optimizers.Adam(learning_rate=learning_rate),
                         metrics=["accuracy"])
 
